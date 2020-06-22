@@ -11,12 +11,10 @@ import spring.firstproject.mads.repos.ClientRepo;
 public class ClientController {
     @Autowired
     private ClientRepo clientRepo;
-    @PostMapping
+    @PostMapping("/add")
     public @ResponseBody String postClient(@RequestParam String fname,@RequestParam String lname, @RequestParam String email){
-        Client client=new Client();
-        client.setfName(fname);
-        client.setlName(lname);
-        client.setEmail(email);
+        Client client=new Client(fname,lname,email);
+
         clientRepo.save(client);
         return "Saved";
     }
@@ -24,7 +22,7 @@ public class ClientController {
     @GetMapping(path="/{id}")
     public @ResponseBody String getAllUsers(@PathVariable long id) {
 
-        return clientRepo.findById(id).toString();
+        return  clientRepo.findById(id).get().getEmail();
     }
 
 }

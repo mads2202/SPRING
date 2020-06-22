@@ -9,10 +9,17 @@ import javax.persistence.Id;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
     private String fName;
     private String lName;
     private String email;
+    public Client(){};
+
+    public Client(String fName, String lName, String email) {
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+    }
 
     public String getfName() {
         return fName;
